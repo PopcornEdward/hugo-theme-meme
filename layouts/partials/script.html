@@ -1,5 +1,8 @@
-{{- $scripts := slice "js/main.js" -}}
 
+
+
+{{- $scripts := slice "js/main.js" -}}
+{{- $scripts = union $scripts (slice "js/third-party/jquery.slim.min.js") -}}
 {{- if and .Site.Params.enableForceHTTPS (eq hugo.Environment "production") -}}
     {{- $scripts = union $scripts (slice "js/force-https.js") -}}
 {{- end -}}
@@ -15,6 +18,11 @@
 {{- if .Site.Params.enableBackToTopAutoHide -}}
     {{- $scripts = union $scripts (slice "js/back-to-top.js") -}}
 {{- end -}}
+<!-- toc交互 -->
+{{- if .Site.Params.enableTOC -}}
+    {{- $scripts = union $scripts (slice "js/utils/toc.js") -}}
+{{- end -}}
+<!--  -->
 
 {{- if .Site.Params.enableDarkMode -}}
     {{- $scripts = union $scripts (slice "js/dark-mode.js") -}}

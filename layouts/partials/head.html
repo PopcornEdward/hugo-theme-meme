@@ -66,7 +66,9 @@
     <meta name="msapplication-TileColor" content="{{ $msApplicationTileColor }}" />
     <meta name="msapplication-TileImage" content="{{ $msApplicationTileImage }}" />
     <link rel="manifest" href="{{ $manifest | relURL }}" />
-
+    <!-- <script src="{{ "js/third-party/jquery.min.js" | relURL }}"></script> -->
+    
+    {{ partial "third-party/jquery.html" . }}
     <!-- Atom / RSS -->
     {{ with .OutputFormats.Get "SectionsAtom" -}}
         <link rel="{{ .Rel }}" type="{{ .MediaType }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}" />
@@ -74,6 +76,7 @@
     {{ with .OutputFormats.Get "SectionsRSS" -}}
         <link rel="{{ .Rel }}" type="{{ .MediaType }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}" />
     {{ end }}
+
 
     <!-- SEO -->
     <link rel="canonical" href="{{ .Permalink }}" />
@@ -115,6 +118,9 @@
     {{ if and .Site.Params.yandexMetrikaId (eq hugo.Environment "production") }}
         {{ partial "third-party/yandex-metrika.html" . }}
     {{- end }}
+
+
+    
 
     {{ partial "custom/head.html" . }}
 </head>

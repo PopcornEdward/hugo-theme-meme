@@ -1,27 +1,34 @@
-{{- $toc := .TableOfContents -}}
+<div id="toc_post_box">
+    {{- $toc := .TableOfContents -}}
 
-<!-- Change TOC Attribute -->
-{{- $regexPatternTOC := `<nav id="TableOfContents">` -}}
-{{- $regexReplacementTOC := `<nav class="contents">` -}}
-{{- $toc = $toc | replaceRE $regexPatternTOC $regexReplacementTOC -}}
+    <!-- Change TOC Attribute -->
+    {{- $regexPatternTOC := `<nav id="TableOfContents">` -}}
+    {{- $regexReplacementTOC := `<nav class="contents">` -}}
+    {{- $toc = $toc | replaceRE $regexPatternTOC $regexReplacementTOC -}}
 
-<!-- Inject Class Attribute -->
-{{- $regexPatternTOC := `(<nav class="contents">\n.+)<(ol|ul)>` -}}
-{{- $regexReplacementTOC := `$1<$2 class="toc">` -}}
-{{- $toc = $toc | replaceRE $regexPatternTOC $regexReplacementTOC -}}
+    <!-- Inject Class Attribute -->
+    {{- $regexPatternTOC := `(<nav class="contents">\n.+)<(ol|ul)>` -}}
+    {{- $regexReplacementTOC := `$1<$2 class="toc">` -}}
+    {{- $toc = $toc | replaceRE $regexPatternTOC $regexReplacementTOC -}}
 
-<!-- Inject TOC Title -->
-{{- if .Site.Params.displayTOCTitle -}}
+    <!-- Inject TOC Title -->
+    {{- if .Site.Params.displayTOCTitle -}}
     {{- $regexPatternTOC := `(<nav class="contents">\n.+)(<(ol|ul) class="toc">)` -}}
     {{- $regexReplacementTOC := (printf `$1<h2 id="contents" class="contents-title">%s</h2>$2` (i18n "tocTitle")) -}}
     {{- $toc = $toc | replaceRE $regexPatternTOC $regexReplacementTOC -}}
-{{- end -}}
+    {{- end -}}
 
-<!-- Link Headings to TOC -->
-{{- if .Site.Params.linkHeadingsToTOC -}}
+    <!-- Link Headings to TOC -->
+    {{- if .Site.Params.linkHeadingsToTOC -}}
     {{- $regexPatternTOC := `(<a)( href="#([^"]+)">)` -}}
     {{- $regexReplacementTOC := `$1 id="contents:$3"$2` -}}
     {{- $toc = $toc | replaceRE $regexPatternTOC $regexReplacementTOC -}}
-{{ end }}
+    {{ end }}
 
-{{- $toc | safeHTML -}}
+    {{- $toc | safeHTML -}}
+</div>
+<div id="toc_fix_box" >
+    <!-- {{- $toc := .TableOfContents -}} -->
+    <!-- {{ .TableOfContents }} -->
+    
+</div>
