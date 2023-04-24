@@ -298,6 +298,12 @@ $baseRelURL: "{{ "" | relURL | strings.TrimSuffix "/" }}";
 
 // Components
 
+// toc style
+{{ if .Site.Params.enableTOC }}
+   @import "components/toc";
+{{ end }}
+
+
 {{ if and .Site.IsMultiLingual .Site.Params.enableLangToggle }}
     @import "components/multilingual";
 {{ end }}
@@ -417,6 +423,8 @@ $baseRelURL: "{{ "" | relURL | strings.TrimSuffix "/" }}";
 {{ if .Site.Params.enableTagCloud }}
     @import "pages/tag-cloud";
 {{ end }}
+
+
 
 
 // 404 Page

@@ -27,8 +27,14 @@
 
     {{- $toc | safeHTML -}}
 </div>
-<div id="toc_fix_box" >
+<div id="toc_fix_box" class="toc_fix_box default" style="display:none">
     <!-- {{- $toc := .TableOfContents -}} -->
-    <!-- {{ .TableOfContents }} -->
-    
+    {{ .TableOfContents }}
+    <!-- {{ range .Site.Pages }}
+    <h2>{{ .Title }}</h2>
+    <p>{{ .Content }}</p>
+    {{ end }} -->
+    <div class="ext_toc_btn">
+        {{- partial "utils/icon.html" (dict "$" . "name" "postDir" "class" "postDir-icon") -}}
+    </div>
 </div>

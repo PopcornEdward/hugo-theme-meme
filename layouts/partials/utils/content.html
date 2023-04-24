@@ -4,7 +4,7 @@
 {{- $enableTOC := .Params.toc | default .Site.Params.enableTOC -}}
 {{- if and $enableTOC .Site.Params.linkHeadingsToTOC -}}
     {{- $regexPatternLinkHeadings := `(<h[1-6] id="([^"]+)">)(.+)?(</h[1-6]+>)` -}}
-    {{- $regexReplacementLinkHeadings := `$1<a href="#contents:$2" class="headings">$3</a>$4` -}}
+    {{- $regexReplacementLinkHeadings := `$1<a href="#:$2" class="headings">$3</a>$4` -}}
     {{- $Content = $Content | replaceRE $regexPatternLinkHeadings $regexReplacementLinkHeadings -}}
 {{- end -}}
 
@@ -101,6 +101,7 @@
 <!-- Image & Video Footnote -->
 {{- $regexPatternFootnoteImage := `(<sup)(.+</sup><(img|video))` -}}
 {{- $regexReplacementFootnoteImage := `$1 style="float:right"$2` -}}
+
 {{- $Content = $Content | replaceRE $regexPatternFootnoteImage $regexReplacementFootnoteImage -}}
 
 <!-- Image & Video Caption -->
